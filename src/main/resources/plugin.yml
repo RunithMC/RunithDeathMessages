@@ -1,0 +1,10 @@
+name: RunithDeathMessages
+version: 1.0.0
+main: net.runith.death.DeathMessagesPlugin
+description: Simple death messages for runith
+authors: [iChoco_Milk]
+
+commands:
+  deathreload:
+    permission: "runithdeath.reload"
+    permission-message: "&cYou don't have permissions"
