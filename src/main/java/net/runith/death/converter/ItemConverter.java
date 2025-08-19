@@ -15,22 +15,14 @@ import java.util.Locale;
 public final class ItemConverter {
 
     public static String convertItemStackToJson(ItemStack itemStack) {
-        try {
-            net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(itemStack);
-            NBTTagCompound compound = new NBTTagCompound();
-            nmsItem.save(compound);
-            return compound.toString();
-        } catch (Exception e) {
-            return null;
-        }
+        net.minecraft.server.v1_8_R3.ItemStack nmsItem = CraftItemStack.asNMSCopy(itemStack);
+        NBTTagCompound compound = new NBTTagCompound();
+        nmsItem.save(compound);
+        return compound.toString();
     }
 
     public static TextComponent convertItemStackToComponents(final ItemStack itemStack) {
         final String json = convertItemStackToJson(itemStack);
-        if (json == null) {
-            return new TextComponent(ChatColor.RED + "Error on converting item to JSON.");
-        }
-
         final String itemName;
         if (itemStack.hasItemMeta() && itemStack.getItemMeta().hasDisplayName()) {
             itemName = itemStack.getItemMeta().getDisplayName();

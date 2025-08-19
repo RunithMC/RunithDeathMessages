@@ -6,6 +6,7 @@ import net.runith.death.converter.ItemConverter;
 import net.runith.death.model.DeathMessages;
 import net.runith.death.model.Titles;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -46,7 +47,7 @@ public final class PlayerDeathListener implements Listener {
         final ItemStack itemInHand = killer.getItemInHand();
 
         deathMessage += deathMessages.getKillerExistFormat().replace("%k%", killer.getName());
-        if (itemInHand == null) {
+        if (itemInHand == null || itemInHand.getType() == Material.AIR) {
             event.setDeathMessage(deathMessage);
             return;
         }
