@@ -10,6 +10,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -32,7 +33,10 @@ public final class PlayerDeathListener implements Listener {
     }
 
     private void setDeathMessage(PlayerDeathEvent event) {
-        String deathMessage = deathMessages.getDeathMessage(event.getEntity().getLastDamageCause().getCause());
+        final EntityDamageEvent.DamageCause damageCause = (event.getEntity().getLastDamageCause() == null) ?
+                EntityDamageEvent.DamageCause.MAGIC
+                : event.getEntity().getLastDamageCause().getCause();
+        String deathMessage = deathMessages.getDeathMessage(damageCause);
         if (deathMessage == null) {
             event.setDeathMessage(null);
             return;
