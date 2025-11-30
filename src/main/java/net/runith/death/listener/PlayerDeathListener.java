@@ -12,6 +12,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 @RequiredArgsConstructor
@@ -23,7 +24,11 @@ public final class PlayerDeathListener implements Listener {
     @EventHandler
     public void onDeath(final PlayerDeathEvent event) {
         setDeathMessage(event);
-        sendTitle(event.getEntity());
+    }
+
+    @EventHandler
+    public void onRespawn(final PlayerRespawnEvent event) {
+        sendTitle(event.getPlayer());
     }
 
     private void sendTitle(final Player player) {
